@@ -31,3 +31,54 @@
     transform: rotate(360deg);
   }
 }
+
+.panel.panel-primary {
+  margin-top: 17px;
+}
+label {
+  margin-right: 15px;
+}
+input[type="radio"] {
+  margin-left: 27px;
+}
+
+element.style {
+  font-family: cursive;
+  color: white;
+  font-size: 16px;
+  
+}
+a{
+  font-family: cursive;
+  color: white !important;
+  font-size: 16px;
+  margin-right: 21px;
+  
+}
+
+a:hover{
+  color: white;
+  font-weight: bold
+}
+a:active{
+  color: white;
+}
+button.btn.btn-danger {
+  margin-left: 10px;
+  /* margin-right: -19px; */
+}
+span.label.label-warning {
+  padding: 6px;
+  justify-items: center;
+  margin-left: 62px;
+
+}
+span.label.label-success {
+  padding: 6px;
+  justify-items: center;
+  margin-left: 62px;
+
+}
+th {
+  width: 200px;
+}
