@@ -2,53 +2,25 @@ import React, { Component } from 'react';
 import ProductList from '../../component/product-list/ProductList';
 import ProductItem from '../../component/product-item/ProductItem';
 import { connect } from 'react-redux';
-import CallAPI from '../../utils/ApiCaller'
+
 import {Link} from 'react-router-dom'
+import { actFetchProductRequest,actDeleteProductRequest} from'../../action/index'
+
 class ProductListPage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            products: [],
-        }
-    }
+    
 
 componentDidMount() {
-    CallAPI('products','get',null).then(res =>{
-        this.setState({
-            products:res.data
-        });
-    })
+    this.props.fetchAllProducts()
 }
 
 onDelete =(id)=>{
-    var {products} = this.state;
-    CallAPI(`products/${id}`,`delete`,null).then(res =>{
-        if(res.status===200){
-            var index =this.findIndex(products,id);
-            if(index!== -1){
-                products.splice(index,1)
-                this.setState({
-                    products:products
-                });
-            }
-        }
-    })
+    this.props.onDeleteProduct(id)
 } 
 
-findIndex =(products,id)=>{
-    var result = -1;
-    products.forEach((products,index) => {
-        if(products.id===id){
-            result = index
-        }
-    });
-    return result;
-}
-
     render() {
-        var {products} = this.state;
+        // var {products} = this.state;
         
-        // var {products} =this.props;
+        var {products} =this.props;
 
         return (
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -86,4 +58,15 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, null, null)(ProductListPage)
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        fetchAllProducts: () => {
+            dispatch(actFetchProductRequest());
+        },
+        onDeleteProduct: (id) => {
+            dispatch(actDeleteProductRequest(id));
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps, null)(ProductListPage)

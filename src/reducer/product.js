@@ -1,21 +1,32 @@
-var initState =[
-    {
-        id:1,
-        name:'hoa huong duong',
-        price:500,
-        status:true
-    },
-    {
-        id:2,
-        name:'hoa hong',
-        price:500,
-        status:false
-    }
-];
-const products = ( state = initState,action)=>{
-    switch(action.type){
+import * as Types from '../const/ActionTypes'
+var initState = [];
+var findIndex =(products,id)=>{
+    var result = -1;
+    products.forEach((products,index) => {
+        if(products.id===id){
+            result = index
+        }
+    });
+    return result;
+}
+const products = (state = initState, action) => {
+    var index = -1;
+    var {id} = action;
+    switch (action.type) {
+        case Types.FETCH_PRODUCTS:
+            state = action.products;
+            return [...state];
+        case Types.DELETE_PRODUCT:
+           index = findIndex(state,id)
+           state.splice(index,1)
+           return[...state];
+        case Types.ADD_PRODUCT:
+            console.log(action.product);
+            debugger;
+           state.push(action.product);
+           return[...state];
         default: return [...state]
     }
 }
 
-export default products
+export default products  

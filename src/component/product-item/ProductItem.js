@@ -7,7 +7,6 @@ class ProductItem extends Component {
             console.log('id: ',id);
             this.props.onDelete(id)
         }
-        
     }
     render() {
     var {index,product} = this.props;
