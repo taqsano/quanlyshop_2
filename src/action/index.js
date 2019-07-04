@@ -14,13 +14,14 @@ export const actFetchProductRequest =()=>{
         })
     }
 }
-
+////
 export const actDeleteProduct =(id)=>{
     return {
         type: Types.DELETE_PRODUCT,
         id
     }
 }
+
 export const actDeleteProductRequest =(id)=>{
     return (dispatch)=>{
         CallAPI(`products/${id}`,'delete',null).then(res=>{
@@ -28,16 +29,47 @@ export const actDeleteProductRequest =(id)=>{
         })
     }
 }
+//////
 export const actAddProduct =(product)=>{
     return {
         type: Types.ADD_PRODUCT,
         product
     }
 }
+
 export const actAddProductRequest =(product)=>{
     return (dispatch)=>{
         return CallAPI(`products`,'post',product).then(res=>{
             dispatch(actAddProduct(res.data));
         })
+    }
+}
+//////
+export const actGetProduct =(product)=>{
+    return {
+        type: Types.EDIT_PRODUCT,
+        product
+    }
+}
+export const actGetProductRequest =(id)=>{
+    return (dispatch)=>{
+        return CallAPI(`products/${id}`,'get',null).then(res=>{
+            dispatch(actGetProduct(res.data));
+            
+        }) 
+    }
+}
+//////
+export const actUpdateProduct =(product)=>{
+    return {
+        type: Types.UPDATE_PRODUCT,
+        product
+    }
+}
+export const actUpdateProductRequest =(product)=>{
+    return (dispatch)=>{
+        return CallAPI(`products/${product.id}`,'put',product).then(res=>{
+            dispatch(actUpdateProduct(res.data));
+        }) 
     }
 }
